@@ -2,7 +2,7 @@
 *	Cart object class
 *
 * 	@author Bene Roch <roch.bene@gmail.com>
-* 	@version 2013-09-03
+* 	@version 2014-06-17
 * 	@since Version 2013-09-03
 *
 */
@@ -219,14 +219,27 @@ var Cart = function(opts) {
 
 		price = parseFloat(price);
 		var decimals = price - Math.floor(price);
+
 		decimals = Math.round(Math.round(parseFloat(decimals)*10000)/100);
+		if (decimals == 0 || decimals == '0') {
+			decimals = '00';
+		}
 		price = Math.floor(price);
+
+		if (isNaN(price)) {
+			price = 0;
+		}
+
+		if (isNaN(decimals)) {
+			decimals == '00';
+		}
 
 		if (lang == 'en') {
 			return "$"+price+'.'+decimals;
 		} else {
 			return price+','+decimals+'$';
 		}
+	}
 	}
 
 }
